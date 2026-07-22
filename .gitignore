@@ -1,0 +1,55 @@
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.spec
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env/
+
+# ========================
+# Flask / App Specific
+# ========================
+database.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+
+# ========================
+# Firebase / Google Cloud
+# ========================
+# IMPORTANT: Never commit service account keys to version control!
+serviceAccountKey.json
+*serviceAccount*.json
+*.pem
+*.p12
+
+# ========================
+# IDE / Editor Files
+# ========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ========================
+# OS Generated
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini

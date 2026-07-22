@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Smart Farmer Service Center - Home{% endblock %}
+
+{% block content %}
+<!-- Full-Screen Hero Image Carousel -->
+<div class="hero-slider">
+    <!-- Slide 1 -->
+    <div class="hero-slide active" style="background-image: url('{{ url_for('static', filename='images/slide1.png') }}');">
+        <div class="hero-content">
+            <h1>Empowering Farmers with Smart Technology</h1>
+            <p>Get instant weather forecasts, tailored crop advice, access to quality farming products, and expert insights to maximize your harvest yield.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('services') }}" class="btn btn-accent-custom btn-lg"><i class="bi bi-gear-fill me-2"></i>Explore Services</a>
+                <a href="{{ url_for('store') }}" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-bag-fill me-2"></i>Visit Marketplace</a>
+            </div>
+        </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/slide2.png') }}');">
+        <div class="hero-content">
+            <h1>Live Weather and Crop Guidance</h1>
+            <p>Access hyper-localized live weather data and connect with agronomy specialists to make informed irrigation and seeding decisions.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('register') }}" class="btn btn-accent-custom btn-lg"><i class="bi bi-person-plus-fill me-2"></i>Register Today</a>
+                <a href="{{ url_for('services') }}" class="btn btn-outline-light btn-lg px-4">Guidance Details</a>
+            </div>
+        </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/slide3.png') }}');">
+        <div class="hero-content">
+            <h1>Premium Seeds, Fertilizers & Tools</h1>
+            <p>Purchase curated, tested, and certified inputs directly from our digital storefront with simplified payments and door-to-door delivery.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('store') }}" class="btn btn-accent-custom btn-lg"><i class="bi bi-cart-fill me-2"></i>Shop Seeds & Tools</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg px-4">Contact Support</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Informational Marketing Benefit Cards -->
+<div class="container my-5 py-4">
+    <div class="text-center mb-5">
+        <h2 class="section-title">Why Smart Farmer Service Center?</h2>
+        <p class="text-muted col-md-8 mx-auto">We combine traditional agriculture knowledge with modern tech solutions to deliver an all-in-one platform built for the modern farmer's everyday needs.</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Benefit Card 1 -->
+        <div class="col-md-4">
+            <div class="card card-custom h-100 text-center p-4">
+                <div class="card-body">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-cream rounded-circle p-3 mb-4" style="width: 80px; height: 80px;">
+                        <i class="bi bi-cloud-sun-fill text-primary-custom fs-1"></i>
+                    </div>
+                    <h4 class="card-title mb-3">Live Forecasts & Guidance</h4>
+                    <p class="card-text text-muted">Enter your city coordinates to see up-to-date atmospheric information. Get recommendations on planting and pest prevention matching your climate conditions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Benefit Card 2 -->
+        <div class="col-md-4">
+            <div class="card card-custom h-100 text-center p-4">
+                <div class="card-body">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-cream rounded-circle p-3 mb-4" style="width: 80px; height: 80px;">
+                        <i class="bi bi-shield-check text-primary-custom fs-1"></i>
+                    </div>
+                    <h4 class="card-title mb-3">Quality Agri-Marketplace</h4>
+                    <p class="card-text text-muted">Browse high-grade seeds, fertilizers, and tools. Our products are sourced directly from verified manufacturers, ensuring quality compliance and longevity.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Benefit Card 3 -->
+        <div class="col-md-4">
+            <div class="card card-custom h-100 text-center p-4">
+                <div class="card-body">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-cream rounded-circle p-3 mb-4" style="width: 80px; height: 80px;">
+                        <i class="bi bi-journal-bookmark-fill text-primary-custom fs-1"></i>
+                    </div>
+                    <h4 class="card-title mb-3">Expert Support & Schemes</h4>
+                    <p class="card-text text-muted">Stay informed on governmental subsidies and crop insurance schemas. Submit your issues directly to our consulting team for quick, custom resolutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

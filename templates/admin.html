@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel - Smart Farmer Service Center{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <h1>Administrator Control Center</h1>
+        <p class="lead mb-0 text-white-50">Manage the product catalog, check support tickets, and view customer purchase transactions.</p>
+    </div>
+</div>
+
+<div class="container my-5">
+    <!-- Top Row: KPI Cards -->
+    <div class="row g-4 mb-5">
+        <!-- KPI 1: Products -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-custom shadow-sm p-3 border-start border-4 border-success">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-muted small text-uppercase mb-1">Catalog Items</h6>
+                        <h3 class="font-weight-bold text-primary-custom mb-0">{{ kpis.total_products }}</h3>
+                    </div>
+                    <div class="bg-cream rounded-circle p-2" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-tag-fill text-primary-custom fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- KPI 2: Users -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-custom shadow-sm p-3 border-start border-4 border-success">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-muted small text-uppercase mb-1">Total Users</h6>
+                        <h3 class="font-weight-bold text-primary-custom mb-0">{{ kpis.total_users }}</h3>
+                    </div>
+                    <div class="bg-cream rounded-circle p-2" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-people-fill text-primary-custom fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- KPI 3: Contacts -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-custom shadow-sm p-3 border-start border-4 border-success">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-muted small text-uppercase mb-1">Support Queries</h6>
+                        <h3 class="font-weight-bold text-primary-custom mb-0">{{ kpis.total_contacts }}</h3>
+                    </div>
+                    <div class="bg-cream rounded-circle p-2" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-chat-right-text-fill text-primary-custom fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- KPI 4: Orders -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-custom shadow-sm p-3 border-start border-4 border-success">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="text-muted small text-uppercase mb-1">Total Orders</h6>
+                        <h3 class="font-weight-bold text-primary-custom mb-0">{{ kpis.total_orders }}</h3>
+                    </div>
+                    <div class="bg-cream rounded-circle p-2" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-cart-check-fill text-primary-custom fs-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Section: Grid Split -->
+    <div class="row g-4">
+        <!-- Left Column: Add Catalog Product Form -->
+        <div class="col-lg-4">
+            <div class="admin-sidebar shadow-sm">
+                <h4 class="text-primary-custom font-weight-bold mb-4 pb-2 border-bottom border-light"><i class="bi bi-plus-circle-fill me-2"></i>Add Product</h4>
+                
+                <form action="{{ url_for('admin_product_add') }}" method="POST" class="needs-validation" novalidate>
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <label for="prod_name" class="form-label small font-weight-bold">Product Name</label>
+                        <input type="text" class="form-control" id="prod_name" name="name" placeholder="e.g. Organic Tomato Seeds" required>
+                        <div class="invalid-feedback">Please enter product name.</div>
+                    </div>
+
+                    <!-- Category Select -->
+                    <div class="mb-3">
+                        <label for="prod_category" class="form-label small font-weight-bold">Category</label>
+                        <select class="form-select" id="prod_category" name="category" required style="border-radius: var(--border-radius); padding: 0.75rem 1rem;">
+                            <option value="" disabled selected>Select Category...</option>
+                            <option value="Seeds">Seeds</option>
+                            <option value="Fertilizers">Fertilizers</option>
+                            <option value="Tools">Tools</option>
+                            <option value="Pesticides">Pesticides</option>
+                        </select>
+                        <div class="invalid-feedback">Please choose a category.</div>
+                    </div>
+
+                    <!-- Price Input -->
+                    <div class="mb-3">
+                        <label for="prod_price" class="form-label small font-weight-bold">Price ($)</label>
+                        <input type="number" step="0.01" min="0.01" class="form-control" id="prod_price" name="price" placeholder="e.g. 19.99" required>
+                        <div class="invalid-feedback">Please enter a valid price (> 0).</div>
+                    </div>
+
+                    <!-- Image URL / Filename -->
+                    <div class="mb-3">
+                        <label for="prod_image" class="form-label small font-weight-bold">Image Filename</label>
+                        <input type="text" class="form-control" id="prod_image" name="image" placeholder="e.g. wheat_seeds.png" value="wheat_seeds.png" required>
+                        <div class="form-text text-muted small mt-1">Provide filename or image url. (e.g. `wheat_seeds.png`, `organic_fertilizer.png`, `hand_trowel.png`, `eco_pest_control.png`)</div>
+                        <div class="invalid-feedback">Please specify an image filename.</div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="mb-4">
+                        <label for="prod_desc" class="form-label small font-weight-bold">Product Description</label>
+                        <textarea class="form-control" id="prod_desc" name="description" rows="4" placeholder="Describe usage instructions and benefits..." required></textarea>
+                        <div class="invalid-feedback">Please write product details.</div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary-custom btn-md"><i class="bi bi-check-circle me-2"></i>Save to Catalog</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Column: Tables Pipeline -->
+        <div class="col-lg-8">
+            <!-- Table 1: Active Products Catalog -->
+            <div class="card card-custom shadow-sm p-4 mb-4">
+                <h4 class="text-primary-custom font-weight-bold mb-4 pb-2 border-bottom border-light"><i class="bi bi-list-stars me-2"></i>Active Catalog Products</h4>
+                
+                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                    <table class="table table-hover align-middle table-sm" style="font-size: 0.9rem;">
+                        <thead class="sticky-top bg-white" style="z-index: 10;">
+                            <tr>
+                                <th scope="col" class="bg-primary text-white p-2">ID</th>
+                                <th scope="col" class="bg-primary text-white p-2">Name</th>
+                                <th scope="col" class="bg-primary text-white p-2">Category</th>
+                                <th scope="col" class="bg-primary text-white p-2">Price</th>
+                                <th scope="col" class="bg-primary text-white p-2 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if products and products|length > 0 %}
+                                {% for product in products %}
+                                    <tr>
+                                        <td>#{{ product.id }}</td>
+                                        <td><strong class="text-primary-custom">{{ product.name }}</strong></td>
+                                        <td><span class="badge badge-custom">{{ product.category }}</span></td>
+                                        <td>${{ "%.2f"|format(product.price) }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ url_for('admin_product_delete', product_id=product.id) }}" class="btn btn-outline-danger btn-sm py-1 px-2" onclick="return confirm('Are you sure you want to delete this product?');">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center py-4 text-muted">No products in database catalog.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table 2: Inbound Customer Support Tickets -->
+            <div class="card card-custom shadow-sm p-4 mb-4">
+                <h4 class="text-primary-custom font-weight-bold mb-4 pb-2 border-bottom border-light"><i class="bi bi-chat-left-dots me-2"></i>Inbound Support Queries</h4>
+                
+                <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
+                    <table class="table table-hover align-middle table-sm" style="font-size: 0.9rem;">
+                        <thead class="sticky-top bg-white" style="z-index: 10;">
+                            <tr>
+                                <th scope="col" class="bg-primary text-white p-2">Name</th>
+                                <th scope="col" class="bg-primary text-white p-2">Email</th>
+                                <th scope="col" class="bg-primary text-white p-2">Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if contacts and contacts|length > 0 %}
+                                {% for contact in contacts %}
+                                    <tr>
+                                        <td><strong>{{ contact.name }}</strong></td>
+                                        <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+                                        <td><p class="mb-0 text-muted small" style="white-space: pre-line;">{{ contact.message }}</p></td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="3" class="text-center py-4 text-muted">No client contact messages received yet.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table 3: Master Order Logging Details -->
+            <div class="card card-custom shadow-sm p-4">
+                <h4 class="text-primary-custom font-weight-bold mb-4 pb-2 border-bottom border-light"><i class="bi bi-receipt-cutoff me-2"></i>Master Order Transactions Log</h4>
+                
+                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                    <table class="table table-hover align-middle table-sm" style="font-size: 0.9rem;">
+                        <thead class="sticky-top bg-white" style="z-index: 10;">
+                            <tr>
+                                <th scope="col" class="bg-primary text-white p-2">Order ID</th>
+                                <th scope="col" class="bg-primary text-white p-2">Buyer</th>
+                                <th scope="col" class="bg-primary text-white p-2">Product</th>
+                                <th scope="col" class="bg-primary text-white p-2 text-center">Qty</th>
+                                <th scope="col" class="bg-primary text-white p-2">Total Paid</th>
+                                <th scope="col" class="bg-primary text-white p-2">Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if orders and orders|length > 0 %}
+                                {% for order in orders %}
+                                    <tr>
+                                        <td>#{{ order.id }}</td>
+                                        <td><strong>{{ order.user_name }}</strong><br><span class="text-muted small" style="font-size: 0.75rem;">ID: #{{ order.user_id }}</span></td>
+                                        <td>{{ order.product_name }}<br><span class="text-muted small" style="font-size: 0.75rem;">ID: #{{ order.product_id }}</span></td>
+                                        <td class="text-center"><span class="badge bg-light text-dark border">{{ order.quantity }}</span></td>
+                                        <td><strong class="text-primary-custom">${{ "%.2f"|format(order.total) }}</strong></td>
+                                        <td class="small text-muted">{{ order.order_date }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center py-4 text-muted">No order records recorded.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

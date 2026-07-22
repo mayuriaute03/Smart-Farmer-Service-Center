@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Services - Smart Farmer Service Center{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <h1>Our Agricultural Services</h1>
+        <p class="lead mb-0 text-white-50">Supporting your farming journey with modern technical solutions, live market rates, and expert agronomy advisories.</p>
+    </div>
+</div>
+
+<!-- Services Grid -->
+<div class="container my-5 py-2">
+    <div class="row g-4">
+        <!-- Service 1: Crop Guidance -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card card-custom h-100 p-3">
+                <div class="card-body">
+                    <div class="text-primary-custom mb-3">
+                        <i class="bi bi-compass-fill fs-1"></i>
+                    </div>
+                    <h4 class="card-title">Crop Guidance</h4>
+                    <p class="card-text text-muted">Get automated recommendations for ideal crops based on geographical soils, seasonal rainfall estimates, and current temperatures. Maximize your farm output capacity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 2: Fertilizer Suggestions -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card card-custom h-100 p-3">
+                <div class="card-body">
+                    <div class="text-primary-custom mb-3">
+                        <i class="bi bi-droplet-half fs-1"></i>
+                    </div>
+                    <h4 class="card-title">Fertilizer Suggestions</h4>
+                    <p class="card-text text-muted">Determine the exact N-P-K nutrient composition ratios needed for your crops. Save input costs and optimize soil nutrition to avoid chemical excesses.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 3: Soil Testing -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card card-custom h-100 p-3">
+                <div class="card-body">
+                    <div class="text-primary-custom mb-3">
+                        <i class="bi bi-database-fill-gear fs-1"></i>
+                    </div>
+                    <h4 class="card-title">Soil Testing</h4>
+                    <p class="card-text text-muted">Submit local soil samples to our partner laboratories. Receive digital reports mapping soil pH, electrical conductivity, organic carbon levels, and water retention indicators.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 4: Government Schemes -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card card-custom h-100 p-3">
+                <div class="card-body">
+                    <div class="text-primary-custom mb-3">
+                        <i class="bi bi-bank2 fs-1"></i>
+                    </div>
+                    <h4 class="card-title">Government Schemes</h4>
+                    <p class="card-text text-muted">Discover state and federal agriculture programs, low-interest microloans, seed subsidies, and crop insurance options tailored for smallholder farmers.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 5: Live Commodity Market Prices -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card card-custom h-100 p-3">
+                <div class="card-body">
+                    <div class="text-primary-custom mb-3">
+                        <i class="bi bi-graph-up-arrow fs-1"></i>
+                    </div>
+                    <h4 class="card-title">Live Commodity Market Prices</h4>
+                    <p class="card-text text-muted">Stay up to date with live wholesale pricing for grains, oilseeds, fruits, and vegetables from major regional market mandis. Prevent middleman exploitation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 6: Expert Consultations -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card card-custom h-100 p-3">
+                <div class="card-body">
+                    <div class="text-primary-custom mb-3">
+                        <i class="bi bi-people-fill fs-1"></i>
+                    </div>
+                    <h4 class="card-title">Expert Consultations</h4>
+                    <p class="card-text text-muted">Directly ask agriculture professors and experienced agronomists questions regarding crop diseases, pest outbreaks, and advanced irrigation solutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Banner -->
+    <div class="card card-custom bg-cream mt-5 border-0 shadow-sm p-4">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <h3 class="text-primary-custom font-weight-bold mb-2">Need Personalized Agriculture Recommendations?</h3>
+                <p class="text-muted mb-0">Register a farmer profile and enter your city to see dynamic recommendations and local weather insights in real time.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{{ url_for('register') }}" class="btn btn-primary-custom btn-lg"><i class="bi bi-person-plus-fill me-2"></i>Create Farmer Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
