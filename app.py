@@ -23,31 +23,31 @@ app.secret_key = os.environ.get('SECRET_KEY', 'smart_farmer_service_center_secre
 # ============================================================
 SERVICE_ACCOUNT_PATH = os.path.join(os.path.dirname(__file__), 'serviceAccountKey.json')
 
-if not firebase_admin._apps:
-    env_creds = os.environ.get('FIREBASE_SERVICE_ACCOUNT_JSON')
-    if env_creds:
-        try:
+firebase_initialized = False
+init_error_message = ""
+db = None
+
+try:
+    if not firebase_admin._apps:
+        env_creds = os.environ.get('FIREBASE_SERVICE_ACCOUNT_JSON')
+        if env_creds:
             creds_dict = json.loads(env_creds)
             cred = credentials.Certificate(creds_dict)
             firebase_admin.initialize_app(cred)
             print("[Firebase] Connected to Firestore using Environment Variable.")
-        except Exception as e:
-            print(f"[Firebase] ERROR parsing FIREBASE_SERVICE_ACCOUNT_JSON: {e}")
-            raise
-    elif os.path.exists(SERVICE_ACCOUNT_PATH):
-        cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
-        firebase_admin.initialize_app(cred)
-        print("[Firebase] Connected to Firestore successfully.")
-    else:
-        print("[Firebase] ERROR: 'serviceAccountKey.json' not found and FIREBASE_SERVICE_ACCOUNT_JSON is not set.")
-        print("[Firebase] Download it from Firebase Console -> Project Settings -> Service Accounts.")
-        print("[Firebase] Place it in the project root directory as 'serviceAccountKey.json' or set the environment variable.")
-        raise FileNotFoundError(
-            "Missing Firebase credentials. Ensure serviceAccountKey.json exists or FIREBASE_SERVICE_ACCOUNT_JSON is set."
-        )
-
-# Get Firestore client reference
-db = firestore.client()
+        elif os.path.exists(SERVICE_ACCOUNT_PATH):
+            cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
+            firebase_admin.initialize_app(cred)
+            print("[Firebase] Connected to Firestore successfully.")
+        else:
+            raise FileNotFoundError("Missing Firebase credentials. Ensure serviceAccountKey.json exists or FIREBASE_SERVICE_ACCOUNT_JSON is set.")
+    
+    # Get Firestore client reference
+    db = firestore.client()
+    firebase_initialized = True
+except Exception as e:
+    init_error_message = str(e)
+    print(f"[Firebase] Initialization ERROR: {init_error_message}")
 
 # ============================================================
 # Firestore Collection References
@@ -124,10 +124,24 @@ def seed_initial_data():
         })
         print("[Firestore] Admin user seeded: admin@farmer.com / admin123")
 
+# ============================================================
+# SERVERLESS HOOKS
+# ============================================================
+has_seeded = False
 
-# Run seeding at startup
-seed_initial_data()
+@app.before_request
+def initialize_serverless():
+    """Runs before every request. Ensures Firebase is working and seeds data once."""
+    if not firebase_initialized:
+        return f"<h1>App Configuration Error</h1><p>Firebase failed to initialize. Vercel deployment likely missing the FIREBASE_SERVICE_ACCOUNT_JSON environment variable or it contains invalid JSON.</p><p><b>Error details:</b> {init_error_message}</p>", 500
 
+    global has_seeded
+    if not has_seeded and db:
+        try:
+            seed_initial_data()
+        except Exception as e:
+            print(f"[Firestore] Seeding error: {e}")
+        has_seeded = True
 
 # ============================================================
 # HELPER: Convert Firestore document to a plain dict
