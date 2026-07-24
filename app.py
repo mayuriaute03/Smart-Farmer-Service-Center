@@ -1,4 +1,5 @@
 import os
+import json
 import functools
 import requests
 from datetime import datetime
@@ -16,22 +17,33 @@ app.secret_key = os.environ.get('SECRET_KEY', 'smart_farmer_service_center_secre
 
 # ============================================================
 # Firebase Admin SDK Initialization
-# Requires 'serviceAccountKey.json' in the project root.
-# Download from: Firebase Console → Project Settings → Service Accounts
+# Requires 'serviceAccountKey.json' in the project root OR 
+# FIREBASE_SERVICE_ACCOUNT_JSON environment variable (for Vercel).
+# Download from: Firebase Console -> Project Settings -> Service Accounts
 # ============================================================
 SERVICE_ACCOUNT_PATH = os.path.join(os.path.dirname(__file__), 'serviceAccountKey.json')
 
 if not firebase_admin._apps:
-    if os.path.exists(SERVICE_ACCOUNT_PATH):
+    env_creds = os.environ.get('FIREBASE_SERVICE_ACCOUNT_JSON')
+    if env_creds:
+        try:
+            creds_dict = json.loads(env_creds)
+            cred = credentials.Certificate(creds_dict)
+            firebase_admin.initialize_app(cred)
+            print("[Firebase] Connected to Firestore using Environment Variable.")
+        except Exception as e:
+            print(f"[Firebase] ERROR parsing FIREBASE_SERVICE_ACCOUNT_JSON: {e}")
+            raise
+    elif os.path.exists(SERVICE_ACCOUNT_PATH):
         cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
         firebase_admin.initialize_app(cred)
         print("[Firebase] Connected to Firestore successfully.")
     else:
-        print("[Firebase] ERROR: 'serviceAccountKey.json' not found.")
+        print("[Firebase] ERROR: 'serviceAccountKey.json' not found and FIREBASE_SERVICE_ACCOUNT_JSON is not set.")
         print("[Firebase] Download it from Firebase Console -> Project Settings -> Service Accounts.")
-        print("[Firebase] Place it in the project root directory as 'serviceAccountKey.json'.")
+        print("[Firebase] Place it in the project root directory as 'serviceAccountKey.json' or set the environment variable.")
         raise FileNotFoundError(
-            "Missing serviceAccountKey.json. Download it from Firebase Console and place it in the project root."
+            "Missing Firebase credentials. Ensure serviceAccountKey.json exists or FIREBASE_SERVICE_ACCOUNT_JSON is set."
         )
 
 # Get Firestore client reference
