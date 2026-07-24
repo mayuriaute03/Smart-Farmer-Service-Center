@@ -108,21 +108,21 @@ def seed_initial_data():
             products_ref.add(product)
         print("[Firestore] Seeded " + str(len(seed_products)) + " products.")
 
-    # --- Seed Default Admin User if no admin exists ---
+    # --- Seed Default Admin User if it doesn't exist ---
     admin_query = db.collection(USERS_COL).where(
-        filter=firestore.FieldFilter('is_admin', '==', True)
+        filter=firestore.FieldFilter('email', '==', 'mayuri@farmer.com')
     ).limit(1).stream()
 
     if not list(admin_query):
-        print("[Firestore] Seeding default admin user...")
+        print("[Firestore] Seeding new default admin user mayuri...")
         db.collection(USERS_COL).add({
-            'name': 'System Administrator',
-            'email': 'admin@farmer.com',
-            'password': 'admin123',
+            'name': 'Mayuri Administrator',
+            'email': 'mayuri@farmer.com',
+            'password': 'mayuri123',
             'is_admin': True,
             'created_at': datetime.utcnow()
         })
-        print("[Firestore] Admin user seeded: admin@farmer.com / admin123")
+        print("[Firestore] Admin user seeded: mayuri@farmer.com / mayuri123")
 
 # ============================================================
 # SERVERLESS HOOKS
