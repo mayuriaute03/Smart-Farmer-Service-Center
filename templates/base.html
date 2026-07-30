@@ -31,28 +31,31 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('index') }}" data-i18n="nav-home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/services' %}active{% endif %}" href="{{ url_for('services') }}">Services</a>
+                        <a class="nav-link {% if request.path == '/services' %}active{% endif %}" href="{{ url_for('services') }}" data-i18n="nav-services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/store' %}active{% endif %}" href="{{ url_for('store') }}">Store / Marketplace</a>
+                        <a class="nav-link {% if request.path == '/store' %}active{% endif %}" href="{{ url_for('store') }}" data-i18n="nav-store">Store / Marketplace</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="{{ url_for('contact') }}">Contact Us</a>
+                        <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="{{ url_for('contact') }}" data-i18n="nav-contact">Contact Us</a>
                     </li>
                 </ul>
                 
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <!-- Google Translate Widget -->
-                    <li class="nav-item me-2 d-flex align-items-center" style="min-height: 40px;">
-                        <div id="google_translate_element"></div>
+                    <!-- Language Selector -->
+                    <li class="nav-item me-2 d-flex align-items-center">
+                        <select id="langSelector" class="form-select form-select-sm bg-transparent text-white border-light shadow-sm" style="width: auto; cursor: pointer;">
+                            <option value="en" class="text-dark">EN - English</option>
+                            <option value="mr" class="text-dark">MR - मराठी</option>
+                        </select>
                     </li>
-                    <!-- Dark Mode Toggle -->
+                    <!-- Theme Toggle -->
                     <li class="nav-item me-3 d-flex align-items-center">
-                        <button id="theme-toggle" class="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;" aria-label="Toggle Dark Mode">
-                            <i id="theme-icon" class="bi bi-moon-fill"></i>
+                        <button id="themeToggle" class="btn btn-sm btn-outline-light rounded-circle shadow-sm" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                            <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
                         </button>
                     </li>
                     {% if session.get('user_id') %}
@@ -88,10 +91,10 @@
                         </li>
                     {% else %}
                         <li class="nav-item me-2">
-                            <a class="btn btn-outline-light px-3 py-1" href="{{ url_for('login') }}">Login</a>
+                            <a class="btn btn-outline-light px-3 py-1" href="{{ url_for('login') }}" data-i18n="nav-login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-accent-custom px-3 py-1" href="{{ url_for('register') }}">Register</a>
+                            <a class="btn btn-accent-custom px-3 py-1" href="{{ url_for('register') }}" data-i18n="nav-register">Register</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -192,19 +195,6 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <!-- Firebase Analytics (Client-Side) -->
     <script type="module" src="{{ url_for('static', filename='js/firebase-init.js') }}"></script>
-    
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,mr',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Alerts Engine - Fade out after 4000ms
     initAlertsEngine();
+
+    // 4. Theme Toggle
+    initThemeToggle();
+
+    // 5. Language Selector
+    initLanguageSelector();
 });
 
 /**
@@ -107,39 +113,116 @@ function initAlertsEngine() {
     });
 }
 
-// Dark Mode Toggle Logic
+// Theme Toggle & Language Selection Logic
 document.addEventListener('DOMContentLoaded', () => {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
+    initThemeToggle();
+    initLanguageSelector();
+});
+
+function initThemeToggle() {
+    const themeToggleBtn = document.getElementById('themeToggle') || document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('themeIcon') || document.getElementById('theme-icon');
+    
+    if (!themeToggleBtn || !themeIcon) return;
     
     // Check local storage for theme preference
     const currentTheme = localStorage.getItem('theme');
-    
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
-        if (themeIcon) {
-            themeIcon.classList.remove('bi-moon-fill');
-            themeIcon.classList.add('bi-sun-fill');
-        }
+        themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+        themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
     }
     
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            
+    themeToggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        
+        // Smooth rotation animation
+        themeIcon.style.transition = 'transform 0.4s ease, opacity 0.2s ease';
+        themeIcon.style.transform = 'rotate(180deg) scale(0.8)';
+        themeIcon.style.opacity = '0.5';
+        
+        setTimeout(() => {
             if (isDark) {
-                // Switch to light
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
-                themeIcon.classList.remove('bi-sun-fill');
-                themeIcon.classList.add('bi-moon-fill');
+                themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
             } else {
-                // Switch to dark
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
-                themeIcon.classList.remove('bi-moon-fill');
-                themeIcon.classList.add('bi-sun-fill');
+                themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+                themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
             }
-        });
+            themeIcon.style.transform = 'rotate(360deg) scale(1)';
+            themeIcon.style.opacity = '1';
+            
+            // Reset transform for next click
+            setTimeout(() => {
+                themeIcon.style.transition = 'none';
+                themeIcon.style.transform = 'rotate(0deg) scale(1)';
+            }, 400);
+        }, 200);
+    });
+}
+
+// Minimal i18n English & Marathi Dictionary
+const i18nDict = {
+    en: {
+        'nav-home': 'Home',
+        'nav-services': 'Services',
+        'nav-store': 'Store / Marketplace',
+        'nav-contact': 'Contact Us',
+        'nav-login': 'Login',
+        'nav-register': 'Register',
+        'hero-title': 'Welcome to Mayuri\'s Farm',
+        'hero-sub': 'Get instant weather forecasts, tailored crop advice, access to quality farming products, and expert insights to maximize your harvest yield.',
+        'btn-explore': '<i class="bi bi-gear-fill me-2"></i>Explore Services',
+        'btn-market': '<i class="bi bi-bag-fill me-2"></i>Visit Marketplace'
+    },
+    mr: {
+        'nav-home': 'मुख्यपृष्ठ',
+        'nav-services': 'सेवा',
+        'nav-store': 'दुकान',
+        'nav-contact': 'संपर्क',
+        'nav-login': 'लॉगिन',
+        'nav-register': 'नोंदणी करा',
+        'hero-title': 'मयुरीच्या शेतात आपले स्वागत आहे',
+        'hero-sub': 'त्वरित हवामान अंदाज, पिकांचा सल्ला, दर्जेदार शेती उत्पादने आणि तज्ञांचे मार्गदर्शन मिळवा.',
+        'btn-explore': '<i class="bi bi-gear-fill me-2"></i>सेवा एक्सप्लोर करा',
+        'btn-market': '<i class="bi bi-bag-fill me-2"></i>बाजारपेठ भेट द्या'
     }
-});
+};
+
+function initLanguageSelector() {
+    const langSelect = document.getElementById('langSelector');
+    if (!langSelect) return;
+
+    const currentLang = localStorage.getItem('appLang') || 'en';
+    langSelect.value = currentLang;
+    translateUI(currentLang);
+
+    langSelect.addEventListener('change', (e) => {
+        const selectedLang = e.target.value;
+        localStorage.setItem('appLang', selectedLang);
+        
+        // Add a smooth fade out
+        document.body.style.transition = 'opacity 0.3s ease';
+        document.body.style.opacity = '0.7';
+        
+        setTimeout(() => {
+            translateUI(selectedLang);
+            document.body.style.opacity = '1';
+        }, 300);
+    });
+}
+
+function translateUI(lang) {
+    const dict = i18nDict[lang];
+    if (!dict) return;
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+            el.innerHTML = dict[key];
+        }
+    });
+}

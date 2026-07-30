@@ -13,14 +13,15 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark Mode Theme Variables */
 [data-theme="dark"] {
-    --primary-color: #0d2820;
-    --accent-leaf: #3d9363;
-    --accent-wheat: #f4c28d;
-    --bg-cream: #1e251d;
-    --text-slate: #e2e8f0;
-    --bg-light: #0f172a;
-    --glass-bg: rgba(13, 40, 32, 0.85);
+    --primary-color: #12352a;
+    --accent-leaf: #3ba56c;
+    --accent-wheat: #e0b48a;
+    --bg-cream: #1e1e1e;
+    --text-slate: #f8fafc;
+    --bg-light: #121212;
+    --glass-bg: rgba(18, 18, 18, 0.85);
 }
 
 body {
@@ -78,8 +79,8 @@ body {
 /* Hero Section & Slider */
 .hero-slider {
     position: relative;
-    height: 90vh;
-    min-height: 550px;
+    height: 60vh;
+    min-height: 400px;
     width: 100%;
     overflow: hidden;
 }
@@ -145,12 +146,11 @@ body {
 
 /* Premium Rounded Cards */
 .card-custom {
-    background: var(--bg-cream);
-    color: var(--text-slate);
+    background: #ffffff;
     border: none;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    transition: var(--transition-smooth), background-color 0.4s ease, color 0.4s ease;
+    transition: var(--transition-smooth);
     overflow: hidden;
 }
 
