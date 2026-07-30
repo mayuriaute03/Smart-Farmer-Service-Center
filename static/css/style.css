@@ -13,11 +13,22 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+[data-theme="dark"] {
+    --primary-color: #0d2820;
+    --accent-leaf: #3d9363;
+    --accent-wheat: #f4c28d;
+    --bg-cream: #1e251d;
+    --text-slate: #e2e8f0;
+    --bg-light: #0f172a;
+    --glass-bg: rgba(13, 40, 32, 0.85);
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     color: var(--text-slate);
     background-color: var(--bg-light);
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Glassmorphic Navigation Bar */
@@ -134,11 +145,12 @@ body {
 
 /* Premium Rounded Cards */
 .card-custom {
-    background: #ffffff;
+    background: var(--bg-cream);
+    color: var(--text-slate);
     border: none;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    transition: var(--transition-smooth);
+    transition: var(--transition-smooth), background-color 0.4s ease, color 0.4s ease;
     overflow: hidden;
 }
 

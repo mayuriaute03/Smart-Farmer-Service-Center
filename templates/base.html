@@ -45,6 +45,16 @@
                 </ul>
                 
                 <ul class="navbar-nav ms-auto align-items-center">
+                    <!-- Google Translate Widget -->
+                    <li class="nav-item me-2 d-flex align-items-center" style="min-height: 40px;">
+                        <div id="google_translate_element"></div>
+                    </li>
+                    <!-- Dark Mode Toggle -->
+                    <li class="nav-item me-3 d-flex align-items-center">
+                        <button id="theme-toggle" class="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;" aria-label="Toggle Dark Mode">
+                            <i id="theme-icon" class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
                     {% if session.get('user_id') %}
                         {% set cart_count = session.get('cart', {}).values() | sum if session.get('cart') else 0 %}
                         {% if not session.get('is_admin') %}
@@ -182,6 +192,19 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <!-- Firebase Analytics (Client-Side) -->
     <script type="module" src="{{ url_for('static', filename='js/firebase-init.js') }}"></script>
+    
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,mr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>
