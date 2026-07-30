@@ -193,31 +193,17 @@ const i18nDict = {
 };
 
 function initLanguageSelector() {
-    const langToggleBtn = document.getElementById('langToggle');
-    if (!langToggleBtn) return;
+    const langBtn = document.getElementById('langToggleBtn');
+    if (!langBtn) return;
 
     let currentLang = localStorage.getItem('appLang') || 'en';
-    
-    // Set initial button text based on lang
-    if(currentLang === 'mr') {
-        langToggleBtn.innerHTML = 'MR / EN';
-    } else {
-        langToggleBtn.innerHTML = 'EN / MR';
-    }
-    
+    langBtn.textContent = currentLang === 'en' ? 'EN' : 'मराठी';
     translateUI(currentLang);
 
-    langToggleBtn.addEventListener('click', () => {
-        // Toggle language
-        currentLang = (currentLang === 'en') ? 'mr' : 'en';
+    langBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'mr' : 'en';
         localStorage.setItem('appLang', currentLang);
-        
-        // Update button text
-        if(currentLang === 'mr') {
-            langToggleBtn.innerHTML = 'MR / EN';
-        } else {
-            langToggleBtn.innerHTML = 'EN / MR';
-        }
+        langBtn.textContent = currentLang === 'en' ? 'EN' : 'मराठी';
         
         // Add a smooth fade out
         document.body.style.transition = 'opacity 0.3s ease';

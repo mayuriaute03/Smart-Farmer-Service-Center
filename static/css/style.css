@@ -8,6 +8,7 @@
     --bg-cream: #fefae0;            /* Soft Cream Details */
     --text-slate: #1e293b;          /* Dark Charcoal Slate */
     --bg-light: #f8fafc;            /* Clean light grey-blue */
+    --bg-card: #ffffff;             /* Card background */
     --glass-bg: rgba(27, 77, 62, 0.85); /* Transparent Emerald */
     --border-radius: 16px;
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -21,7 +22,16 @@
     --bg-cream: #1e1e1e;
     --text-slate: #f8fafc;
     --bg-light: #121212;
+    --bg-card: #1e1e1e;
     --glass-bg: rgba(18, 18, 18, 0.85);
+}
+
+[data-theme="dark"] .text-muted {
+    color: #a1a1aa !important;
+}
+
+[data-theme="dark"] .text-dark {
+    color: #f8fafc !important;
 }
 
 body {
@@ -144,9 +154,9 @@ body {
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Premium Rounded Cards */
+/* Base Cards */
 .card-custom {
-    background: #ffffff;
+    background: var(--bg-card);
     border: none;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
