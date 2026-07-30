@@ -193,23 +193,38 @@ const i18nDict = {
 };
 
 function initLanguageSelector() {
-    const langSelect = document.getElementById('langSelector');
-    if (!langSelect) return;
+    const langToggleBtn = document.getElementById('langToggle');
+    if (!langToggleBtn) return;
 
-    const currentLang = localStorage.getItem('appLang') || 'en';
-    langSelect.value = currentLang;
+    let currentLang = localStorage.getItem('appLang') || 'en';
+    
+    // Set initial button text based on lang
+    if(currentLang === 'mr') {
+        langToggleBtn.innerHTML = 'MR / EN';
+    } else {
+        langToggleBtn.innerHTML = 'EN / MR';
+    }
+    
     translateUI(currentLang);
 
-    langSelect.addEventListener('change', (e) => {
-        const selectedLang = e.target.value;
-        localStorage.setItem('appLang', selectedLang);
+    langToggleBtn.addEventListener('click', () => {
+        // Toggle language
+        currentLang = (currentLang === 'en') ? 'mr' : 'en';
+        localStorage.setItem('appLang', currentLang);
+        
+        // Update button text
+        if(currentLang === 'mr') {
+            langToggleBtn.innerHTML = 'MR / EN';
+        } else {
+            langToggleBtn.innerHTML = 'EN / MR';
+        }
         
         // Add a smooth fade out
         document.body.style.transition = 'opacity 0.3s ease';
         document.body.style.opacity = '0.7';
         
         setTimeout(() => {
-            translateUI(selectedLang);
+            translateUI(currentLang);
             document.body.style.opacity = '1';
         }, 300);
     });
