@@ -8,11 +8,11 @@
 <div class="page-header">
     <div class="container">
         {% if view_mode == 'cart' %}
-            <h1>Your Shopping Cart</h1>
-            <p class="lead mb-0 text-white-50">Review your selected items and complete your order checkout.</p>
+            <h1 data-i18n="cart-title">Your Shopping Cart</h1>
+            <p class="lead mb-0 text-white-50" data-i18n="cart-sub">Review your selected items and complete your order checkout.</p>
         {% else %}
-            <h1>Seeds & Tools Marketplace</h1>
-            <p class="lead mb-0 text-white-50">High-quality seeds, organic fertilizers, tools, and ecological pest control options.</p>
+            <h1 data-i18n="store-title">Seeds & Tools Marketplace</h1>
+            <p class="lead mb-0 text-white-50" data-i18n="store-sub">High-quality seeds, organic fertilizers, tools, and ecological pest control options.</p>
         {% endif %}
     </div>
 </div>
@@ -21,11 +21,11 @@
     {% if view_mode == 'products' %}
         <!-- Category Filter Button Bar -->
         <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
-            <button class="category-btn active" onclick="filterCategory('all', this)">All Products</button>
-            <button class="category-btn" onclick="filterCategory('Seeds', this)">Seeds</button>
-            <button class="category-btn" onclick="filterCategory('Fertilizers', this)">Fertilizers</button>
-            <button class="category-btn" onclick="filterCategory('Tools', this)">Tools</button>
-            <button class="category-btn" onclick="filterCategory('Pesticides', this)">Pesticides</button>
+            <button class="category-btn active" onclick="filterCategory('all', this)" data-i18n="cat-all">All Products</button>
+            <button class="category-btn" onclick="filterCategory('Seeds', this)" data-i18n="cat-seeds">Seeds</button>
+            <button class="category-btn" onclick="filterCategory('Fertilizers', this)" data-i18n="cat-fert">Fertilizers</button>
+            <button class="category-btn" onclick="filterCategory('Tools', this)" data-i18n="cat-tools">Tools</button>
+            <button class="category-btn" onclick="filterCategory('Pesticides', this)" data-i18n="cat-pest">Pesticides</button>
         </div>
 
         <!-- Products Grid Layout -->
@@ -51,7 +51,7 @@
                                     {{ product.description }}
                                 </p>
                                 <div class="d-grid mt-3">
-                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary-custom btn-sm">
+                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary-custom btn-sm" data-i18n="btn-add-cart">
                                         <i class="bi bi-cart-plus-fill me-2"></i>Add to Cart
                                     </a>
                                 </div>
@@ -62,7 +62,7 @@
             {% else %}
                 <div class="col-12 text-center py-5">
                     <i class="bi bi-basket text-muted fs-1 mb-3"></i>
-                    <p class="text-muted">No products found in our catalog. Check back soon!</p>
+                    <p class="text-muted" data-i18n="no-products">No products found in our catalog. Check back soon!</p>
                 </div>
             {% endif %}
         </div>
@@ -76,10 +76,10 @@
                     <table class="table mb-0 align-middle">
                         <thead>
                             <tr>
-                                <th scope="col" style="border-top-left-radius: var(--border-radius);">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col" class="text-center">Quantity</th>
-                                <th scope="col" class="text-end" style="border-top-right-radius: var(--border-radius);">Subtotal</th>
+                                <th scope="col" style="border-top-left-radius: var(--border-radius);" data-i18n="tbl-product">Product</th>
+                                <th scope="col" data-i18n="tbl-price">Price</th>
+                                <th scope="col" class="text-center" data-i18n="tbl-qty">Quantity</th>
+                                <th scope="col" class="text-end" style="border-top-right-radius: var(--border-radius);" data-i18n="tbl-subtotal">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,9 +111,9 @@
                                     <td colspan="4" class="text-center py-5">
                                         <div class="py-3">
                                             <i class="bi bi-cart-x text-muted fs-1 mb-3 d-block"></i>
-                                            <h5>Your cart is currently empty</h5>
-                                            <p class="text-muted mb-4">Go browse our catalog and add items before checking out.</p>
-                                            <a href="{{ url_for('store') }}" class="btn btn-primary-custom btn-md"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
+                                            <h5 data-i18n="cart-empty-hdr">Your cart is currently empty</h5>
+                                            <p class="text-muted mb-4" data-i18n="cart-empty-sub">Go browse our catalog and add items before checking out.</p>
+                                            <a href="{{ url_for('store') }}" class="btn btn-primary-custom btn-md" data-i18n="btn-cont-shop"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -124,8 +124,8 @@
                 
                 {% if cart_items and cart_items|length > 0 %}
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <a href="{{ url_for('store') }}" class="btn btn-outline-custom btn-md"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
-                        <a href="{{ url_for('clear_cart') }}" class="btn btn-outline-danger btn-md"><i class="bi bi-trash-fill me-2"></i>Clear Entire Cart</a>
+                        <a href="{{ url_for('store') }}" class="btn btn-outline-custom btn-md" data-i18n="btn-cont-shop"><i class="bi bi-arrow-left me-2"></i>Continue Shopping</a>
+                        <a href="{{ url_for('clear_cart') }}" class="btn btn-outline-danger btn-md" data-i18n="btn-clear-cart"><i class="bi bi-trash-fill me-2"></i>Clear Entire Cart</a>
                     </div>
                 {% endif %}
             </div>
@@ -134,29 +134,29 @@
             {% if cart_items and cart_items|length > 0 %}
                 <div class="col-lg-4">
                     <div class="cart-summary shadow-sm">
-                        <h4 class="text-primary-custom font-weight-bold mb-4 pb-2 border-bottom border-light">Invoice Summary</h4>
+                        <h4 class="text-primary-custom font-weight-bold mb-4 pb-2 border-bottom border-light" data-i18n="inv-summary">Invoice Summary</h4>
                         
                         <div class="d-flex justify-content-between mb-3 text-muted">
-                            <span>Subtotal</span>
+                            <span data-i18n="inv-subtotal">Subtotal</span>
                             <span>${{ "%.2f"|format(subtotal) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3 text-muted">
-                            <span>Tax / Service (0%)</span>
+                            <span data-i18n="inv-tax">Tax / Service (0%)</span>
                             <span>$0.00</span>
                         </div>
                         <div class="d-flex justify-content-between mb-4 pb-3 border-bottom border-light font-weight-bold text-primary-custom fs-5">
-                            <span>Grand Total</span>
+                            <span data-i18n="inv-total">Grand Total</span>
                             <span>${{ "%.2f"|format(subtotal) }}</span>
                         </div>
 
                         <!-- Checkout form -->
                         <form action="{{ url_for('cart') }}" method="POST">
-                            <div class="alert alert-warning mb-4" style="border-radius: 12px; border: none; font-size: 0.85rem; color: #856404; background-color: #fff3cd;">
+                            <div class="alert alert-warning mb-4" style="border-radius: 12px; border: none; font-size: 0.85rem; color: #856404; background-color: #fff3cd;" data-i18n="inv-note">
                                 <i class="bi bi-info-circle-fill me-2"></i>Orders will be logged to the order tracking database for profile fulfillment.
                             </div>
                             
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary-custom btn-lg"><i class="bi bi-credit-card-fill me-2"></i>Complete Checkout</button>
+                                <button type="submit" class="btn btn-primary-custom btn-lg" data-i18n="btn-complete-checkout"><i class="bi bi-credit-card-fill me-2"></i>Complete Checkout</button>
                             </div>
                         </form>
                     </div>

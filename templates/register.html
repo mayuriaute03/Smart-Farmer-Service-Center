@@ -11,14 +11,14 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-cream rounded-circle p-3 mb-3" style="width: 70px; height: 70px;">
                             <i class="bi bi-person-plus-fill text-primary-custom fs-2"></i>
                         </div>
-                        <h2 class="font-weight-bold text-primary-custom">Farmer Registration</h2>
-                        <p class="text-muted small">Create an account to track local weather conditions and access the marketplace</p>
+                        <h2 class="font-weight-bold text-primary-custom" data-i18n="reg-title">Farmer Registration</h2>
+                        <p class="text-muted small" data-i18n="reg-sub">Create an account to track local weather conditions and access the marketplace</p>
                     </div>
 
                     <form action="{{ url_for('register') }}" method="POST" class="needs-validation" novalidate>
                         <!-- Full Name Input -->
                         <div class="mb-3">
-                            <label for="name" class="form-label font-weight-bold">Full Name</label>
+                            <label for="name" class="form-label font-weight-bold" data-i18n="lbl-fullname">Full Name</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-muted" style="border-radius: var(--border-radius) 0 0 var(--border-radius);"><i class="bi bi-person"></i></span>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="e.g. John Doe" required style="border-radius: 0 var(--border-radius) var(--border-radius) 0;">
@@ -28,7 +28,7 @@
 
                         <!-- Email Input -->
                         <div class="mb-3">
-                            <label for="email" class="form-label font-weight-bold">Email Address</label>
+                            <label for="email" class="form-label font-weight-bold" data-i18n="lbl-email">Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-muted" style="border-radius: var(--border-radius) 0 0 var(--border-radius);"><i class="bi bi-envelope"></i></span>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="e.g. farmer@example.com" required style="border-radius: 0 var(--border-radius) var(--border-radius) 0;">
@@ -38,26 +38,26 @@
 
                         <!-- Password Input -->
                         <div class="mb-4">
-                            <label for="password" class="form-label font-weight-bold">Password</label>
+                            <label for="password" class="form-label font-weight-bold" data-i18n="lbl-password">Password</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-muted" style="border-radius: var(--border-radius) 0 0 var(--border-radius);"><i class="bi bi-lock"></i></span>
                                 <input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="At least 6 characters" required style="border-radius: 0 var(--border-radius) var(--border-radius) 0;">
                                 <div class="invalid-feedback">Password must be at least 6 characters long.</div>
                             </div>
-                            <div class="form-text text-muted small mt-1">Passwords are validated upon form submission.</div>
+                            <div class="form-text text-muted small mt-1" data-i18n="reg-pwd-note">Passwords are validated upon form submission.</div>
                         </div>
 
                         <!-- Submit Button -->
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary-custom btn-lg"><i class="bi bi-person-check-fill me-2"></i>Create Account</button>
+                            <button type="submit" class="btn btn-primary-custom btn-lg" data-i18n="btn-create-acc"><i class="bi bi-person-check-fill me-2"></i>Create Account</button>
                         </div>
                     </form>
 
                     <hr class="my-4 text-muted" style="opacity: 0.15;">
 
                     <div class="text-center">
-                        <p class="mb-0 text-muted small">Already have a profile?</p>
-                        <a href="{{ url_for('login') }}" class="font-weight-bold text-accent-leaf" style="text-decoration: none;">Sign In Instead</a>
+                        <p class="mb-0 text-muted small" data-i18n="reg-already-acc">Already have a profile?</p>
+                        <a href="{{ url_for('login') }}" class="font-weight-bold text-accent-leaf" style="text-decoration: none;" data-i18n="reg-signin-btn">Sign In Instead</a>
                     </div>
                 </div>
             </div>

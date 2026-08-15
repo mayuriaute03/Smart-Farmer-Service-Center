@@ -5,8 +5,8 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="container">
-        <h1>Contact Support & Inquiry</h1>
-        <p class="lead mb-0 text-white-50">Have questions about soil health, agricultural supplies, or governmental schemes? Send us a message.</p>
+        <h1 data-i18n="contact-title">Contact Support & Inquiry</h1>
+        <p class="lead mb-0 text-white-50" data-i18n="contact-sub">Have questions about soil health, agricultural supplies, or governmental schemes? Send us a message.</p>
     </div>
 </div>
 
@@ -16,16 +16,16 @@
         <div class="col-lg-5">
             <div class="card card-custom p-4 shadow-sm h-100 bg-cream border-0">
                 <div class="card-body">
-                    <h3 class="text-primary-custom font-weight-bold mb-4">Get In Touch</h3>
-                    <p class="text-muted mb-5" style="line-height: 1.7;">Our agricultural support personnel and agronomy consultants are available Monday through Saturday (8:00 AM - 6:00 PM) to help address crop failures, ordering complications, or support inquiries.</p>
+                    <h3 class="text-primary-custom font-weight-bold mb-4" data-i18n="contact-touch">Get In Touch</h3>
+                    <p class="text-muted mb-5" style="line-height: 1.7;" data-i18n="contact-touch-desc">Our agricultural support personnel and agronomy consultants are available Monday through Saturday (8:00 AM - 6:00 PM) to help address crop failures, ordering complications, or support inquiries.</p>
                     
                     <div class="d-flex align-items-start mb-4">
                         <div class="bg-white rounded-circle p-2 me-3 shadow-sm" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
                             <i class="bi bi-geo-alt-fill text-primary-custom fs-5"></i>
                         </div>
                         <div>
-                            <h5 class="text-primary-custom font-weight-bold mb-1">Corporate HQ</h5>
-                            <p class="text-muted small mb-0">Main Road, Galleborgaon, MH20-431102</p>
+                            <h5 class="text-primary-custom font-weight-bold mb-1" data-i18n="contact-hq">Corporate HQ</h5>
+                            <p class="text-muted small mb-0" data-i18n="contact-addr">Main Road, Galleborgaon, MH20-431102</p>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
                             <i class="bi bi-telephone-fill text-primary-custom fs-5"></i>
                         </div>
                         <div>
-                            <h5 class="text-primary-custom font-weight-bold mb-1">Phone Line</h5>
+                            <h5 class="text-primary-custom font-weight-bold mb-1" data-i18n="contact-phone-lbl">Phone Line</h5>
                             <p class="text-muted small mb-0">+1 (800) 555-SPROUT (Toll-Free)</p>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <i class="bi bi-envelope-fill text-primary-custom fs-5"></i>
                         </div>
                         <div>
-                            <h5 class="text-primary-custom font-weight-bold mb-1">Email Support</h5>
+                            <h5 class="text-primary-custom font-weight-bold mb-1" data-i18n="contact-email-lbl">Email Support</h5>
                             <p class="text-muted small mb-0">support@farmer.com</p>
                         </div>
                     </div>
@@ -56,33 +56,33 @@
         <div class="col-lg-7">
             <div class="card card-custom p-4 shadow-sm">
                 <div class="card-body">
-                    <h3 class="text-primary-custom font-weight-bold mb-4">Submit An Inquiry</h3>
+                    <h3 class="text-primary-custom font-weight-bold mb-4" data-i18n="contact-form-title">Submit An Inquiry</h3>
                     
                     <form action="{{ url_for('contact') }}" method="POST" class="needs-validation" novalidate>
                         <!-- Name -->
                         <div class="mb-3">
-                            <label for="name" class="form-label font-weight-bold">Your Name</label>
+                            <label for="name" class="form-label font-weight-bold" data-i18n="lbl-name">Your Name</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
                             <div class="invalid-feedback">Please enter your name.</div>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3">
-                            <label for="email" class="form-label font-weight-bold">Email Address</label>
+                            <label for="email" class="form-label font-weight-bold" data-i18n="lbl-email">Email Address</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="e.g. name@example.com" required>
                             <div class="invalid-feedback">Please enter a valid email address.</div>
                         </div>
 
                         <!-- Message -->
                         <div class="mb-4">
-                            <label for="message" class="form-label font-weight-bold">Message / Inquiry Details</label>
+                            <label for="message" class="form-label font-weight-bold" data-i18n="lbl-msg">Message / Inquiry Details</label>
                             <textarea class="form-control" id="message" name="message" rows="6" placeholder="Detail your agronomy questions or catalog issue here..." required></textarea>
                             <div class="invalid-feedback">Please write down your inquiry message.</div>
                         </div>
 
                         <!-- Submit Button -->
                         <div>
-                            <button type="submit" class="btn btn-primary-custom btn-lg w-100"><i class="bi bi-send-fill me-2"></i>Send Message</button>
+                            <button type="submit" class="btn btn-primary-custom btn-lg w-100" data-i18n="btn-send"><i class="bi bi-send-fill me-2"></i>Send Message</button>
                         </div>
                     </form>
                 </div>

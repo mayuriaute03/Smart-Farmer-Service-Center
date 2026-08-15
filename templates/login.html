@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Login - Smart Farmer Service Center{% block title_end %}{% endblock %}{% endblock %}
+{% block title %}Login - Smart Farmer Service Center{% endblock %}
 
 {% block content %}
 <div class="container my-5 py-5">
@@ -11,14 +11,14 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-cream rounded-circle p-3 mb-3" style="width: 70px; height: 70px;">
                             <i class="bi bi-shield-lock-fill text-primary-custom fs-2"></i>
                         </div>
-                        <h2 class="font-weight-bold text-primary-custom">Welcome Back</h2>
-                        <p class="text-muted small">Sign in to access your farmer dashboard or admin controls</p>
+                        <h2 class="font-weight-bold text-primary-custom" data-i18n="login-welcome">Welcome Back</h2>
+                        <p class="text-muted small" data-i18n="login-sub">Sign in to access your farmer dashboard or admin controls</p>
                     </div>
 
                     <form action="{{ url_for('login') }}" method="POST" class="needs-validation" novalidate>
                         <!-- Email Input -->
                         <div class="mb-3">
-                            <label for="email" class="form-label font-weight-bold">Email Address</label>
+                            <label for="email" class="form-label font-weight-bold" data-i18n="lbl-email">Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-muted" style="border-radius: var(--border-radius) 0 0 var(--border-radius);"><i class="bi bi-envelope"></i></span>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="e.g. farmer@example.com" required style="border-radius: 0 var(--border-radius) var(--border-radius) 0;">
@@ -28,7 +28,7 @@
 
                         <!-- Password Input -->
                         <div class="mb-4">
-                            <label for="password" class="form-label font-weight-bold">Password</label>
+                            <label for="password" class="form-label font-weight-bold" data-i18n="lbl-password">Password</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-muted" style="border-radius: var(--border-radius) 0 0 var(--border-radius);"><i class="bi bi-lock"></i></span>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Min 6 characters" required style="border-radius: 0 var(--border-radius) var(--border-radius) 0;">
@@ -38,15 +38,15 @@
 
                         <!-- Submit Button -->
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary-custom btn-lg"><i class="bi bi-box-arrow-in-right me-2"></i>Sign In</button>
+                            <button type="submit" class="btn btn-primary-custom btn-lg" data-i18n="btn-signin"><i class="bi bi-box-arrow-in-right me-2"></i>Sign In</button>
                         </div>
                     </form>
 
                     <hr class="my-4 text-muted" style="opacity: 0.15;">
 
                     <div class="text-center">
-                        <p class="mb-0 text-muted small">Don't have an account yet?</p>
-                        <a href="{{ url_for('register') }}" class="font-weight-bold text-accent-leaf" style="text-decoration: none;">Create a Farmer Account</a>
+                        <p class="mb-0 text-muted small" data-i18n="login-no-acc">Don't have an account yet?</p>
+                        <a href="{{ url_for('register') }}" class="font-weight-bold text-accent-leaf" style="text-decoration: none;" data-i18n="login-create-acc">Create a Farmer Account</a>
                     </div>
                 </div>
             </div>
